@@ -1,0 +1,93 @@
+{% extends 'maintenance/base.html' %}
+
+
+{% block content %}
+
+<h1>Vehicle Maintenance Log</h1>
+
+<div class="card">
+
+    <h2>Dashboard</h2>
+
+    <p>
+        Total Vehicles:
+        <strong>{{ vehicles.count }}</strong>
+    </p>
+
+    <p>
+        Total Maintenance Records:
+        <strong>{{ maintenance_records.count }}</strong>
+    </p>
+
+</div>
+
+
+<div class="card">
+
+    <h2>Upcoming Maintenance</h2>
+
+    {% if upcoming_services %}
+
+        {% for record in upcoming_services %}
+
+            <div class="warning">
+
+                <strong>
+                    {{ record.vehicle.vehicle_number }}
+                </strong>
+
+                - {{ record.service_type }}
+
+                <br>
+
+                Next Service:
+                {{ record.next_service_date }}
+
+                <br>
+
+                Status:
+                {{ record.status }}
+
+            </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <p>
+            No maintenance due within the next 7 days.
+        </p>
+
+    {% endif %}
+
+</div>
+
+
+<div class="card">
+
+    <h2>Quick Actions</h2>
+
+    <a
+        class="button"
+        href="{% url 'maintenance_create' %}"
+    >
+        Add Maintenance
+    </a>
+
+    <a
+        class="button"
+        href="{% url 'maintenance_list' %}"
+    >
+        View Records
+    </a>
+
+    <a
+        class="button"
+        href="{% url 'cost_summary' %}"
+    >
+        Cost Summary
+    </a>
+
+</div>
+
+{% endblock %}

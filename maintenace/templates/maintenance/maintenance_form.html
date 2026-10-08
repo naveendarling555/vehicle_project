@@ -1,0 +1,155 @@
+{% extends 'maintenance/base.html' %}
+
+
+{% block content %}
+
+{% if record %}
+
+    <h1>Edit Maintenance Record</h1>
+
+{% else %}
+
+    <h1>Add Maintenance Record</h1>
+
+{% endif %}
+
+
+<div class="card">
+
+<form method="POST">
+
+    {% csrf_token %}
+
+
+    <label>Vehicle</label>
+
+    <select name="vehicle" required>
+
+        {% for vehicle in vehicles %}
+
+            <option
+                value="{{ vehicle.id }}"
+
+                {% if record and record.vehicle.id == vehicle.id %}
+                    selected
+                {% endif %}
+            >
+
+                {{ vehicle.vehicle_number }}
+                - {{ vehicle.model }}
+
+            </option>
+
+        {% endfor %}
+
+    </select>
+
+
+    <label>Service Type</label>
+
+    <select name="service_type" required>
+
+        <option value="Service">
+            Service
+        </option>
+
+        <option value="Repair">
+            Repair
+        </option>
+
+        <option value="Oil Change">
+            Oil Change
+        </option>
+
+        <option value="General Checkup">
+            General Checkup
+        </option>
+
+    </select>
+
+
+    <label>Description</label>
+
+    <textarea
+        name="description"
+        rows="4"
+        required
+    >{% if record %}{{ record.description }}{% endif %}</textarea>
+
+
+    <label>Service Date</label>
+
+    <input
+        type="date"
+        name="service_date"
+        value="{% if record %}{{ record.service_date|date:'Y-m-d' }}{% endif %}"
+        required
+    >
+
+
+    <label>Next Service Date</label>
+
+    <input
+        type="date"
+        name="next_service_date"
+        value="{% if record %}{{ record.next_service_date|date:'Y-m-d' }}{% endif %}"
+    >
+
+
+    <label>Venue</label>
+
+    <input
+        type="text"
+        name="venue"
+        value="{% if record %}{{ record.venue }}{% endif %}"
+        required
+    >
+
+
+    <label>Mileage</label>
+
+    <input
+        type="number"
+        name="mileage"
+        value="{% if record %}{{ record.mileage }}{% endif %}"
+        required
+    >
+
+
+    <label>Status</label>
+
+    <select name="status">
+
+        <option value="Pending">
+            Pending
+        </option>
+
+        <option value="In Progress">
+            In Progress
+        </option>
+
+        <option value="Completed">
+            Completed
+        </option>
+
+    </select>
+
+
+    <button
+        class="button"
+        type="submit"
+    >
+
+        {% if record %}
+            Update
+        {% else %}
+            Save
+        {% endif %}
+
+    </button>
+
+</form>
+
+</div>
+
+{% endblock %}

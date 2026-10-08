@@ -1,0 +1,60 @@
+{% extends 'maintenance/base.html' %}
+
+
+{% block content %}
+
+<h1>Maintenance Cost Summary</h1>
+
+
+<div class="card">
+
+    <h2>Total Maintenance Cost</h2>
+
+    <h1>
+        ₹{{ total_cost }}
+    </h1>
+
+</div>
+
+
+<div class="card">
+
+    <h2>Cost Breakdown</h2>
+
+    <table>
+
+        <tr>
+            <th>Expense Type</th>
+            <th>Amount</th>
+        </tr>
+
+        <tr>
+            <td>Service</td>
+            <td>₹{{ service_cost }}</td>
+        </tr>
+
+        <tr>
+            <td>Repair</td>
+            <td>₹{{ repair_cost }}</td>
+        </tr>
+
+        <tr>
+            <td>Fuel</td>
+            <td>₹{{ fuel_cost }}</td>
+        </tr>
+
+        <tr>
+            <td>Spare Parts</td>
+            <td>₹{{ spare_parts_cost }}</td>
+        </tr>
+
+        <tr>
+            <th>Total</th>
+            <th>₹{{ total_cost }}</th>
+        </tr>
+
+    </table>
+
+</div>
+
+{% endblock %}

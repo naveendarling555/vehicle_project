@@ -1,0 +1,98 @@
+{% extends 'maintenance/base.html' %}
+
+
+{% block content %}
+
+<h1>Maintenance Records</h1>
+
+<a
+    class="button"
+    href="{% url 'maintenance_create' %}"
+>
+    + Add Maintenance
+</a>
+
+<br><br>
+
+
+<table>
+
+    <tr>
+
+        <th>Vehicle</th>
+        <th>Service Type</th>
+        <th>Service Date</th>
+        <th>Next Service</th>
+        <th>Status</th>
+        <th>Actions</th>
+
+    </tr>
+
+
+    {% for record in records %}
+
+    <tr>
+
+        <td>
+            {{ record.vehicle.vehicle_number }}
+        </td>
+
+        <td>
+            {{ record.service_type }}
+        </td>
+
+        <td>
+            {{ record.service_date }}
+        </td>
+
+        <td>
+            {{ record.next_service_date }}
+        </td>
+
+        <td>
+            {{ record.status }}
+        </td>
+
+        <td>
+
+            <a
+                href="{% url 'maintenance_detail' record.id %}"
+            >
+                View
+            </a>
+
+            |
+
+            <a
+                href="{% url 'maintenance_edit' record.id %}"
+            >
+                Edit
+            </a>
+
+            |
+
+            <a
+                href="{% url 'maintenance_delete' record.id %}"
+            >
+                Delete
+            </a>
+
+        </td>
+
+    </tr>
+
+    {% empty %}
+
+    <tr>
+
+        <td colspan="6">
+            No maintenance records found.
+        </td>
+
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+{% endblock %}

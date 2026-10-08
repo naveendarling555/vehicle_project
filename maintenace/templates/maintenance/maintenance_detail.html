@@ -1,0 +1,77 @@
+{% extends 'maintenance/base.html' %}
+
+
+{% block content %}
+
+<h1>Maintenance Details</h1>
+
+
+<div class="card">
+
+    <p>
+        <strong>Vehicle:</strong>
+        {{ record.vehicle.vehicle_number }}
+    </p>
+
+    <p>
+        <strong>Vehicle Model:</strong>
+        {{ record.vehicle.model }}
+    </p>
+
+    <p>
+        <strong>Service Type:</strong>
+        {{ record.service_type }}
+    </p>
+
+    <p>
+        <strong>Description:</strong>
+        {{ record.description }}
+    </p>
+
+    <p>
+        <strong>Service Date:</strong>
+        {{ record.service_date }}
+    </p>
+
+    <p>
+        <strong>Next Service Date:</strong>
+        {{ record.next_service_date }}
+    </p>
+
+    <p>
+        <strong>Venue:</strong>
+        {{ record.venue }}
+    </p>
+
+    <p>
+        <strong>Mileage:</strong>
+        {{ record.mileage }}
+    </p>
+
+    <p>
+        <strong>Status:</strong>
+        {{ record.status }}
+    </p>
+
+
+    <br>
+
+
+    <a
+        class="button"
+        href="{% url 'maintenance_edit' record.id %}"
+    >
+        Edit
+    </a>
+
+
+    <a
+        class="button delete"
+        href="{% url 'maintenance_delete' record.id %}"
+    >
+        Delete
+    </a>
+
+</div>
+
+{% endblock %}
